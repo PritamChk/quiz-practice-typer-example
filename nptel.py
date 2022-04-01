@@ -10,17 +10,12 @@ app = t.Typer()
 
 
 @app.command()
-def main(name: Optional[str] = None):
-    """
-        --name : Send First Name as Argumnet
-    """
-    msg = "hello"
-    if name:
-        name = t.style(
-            f"{name}", bg=t.colors.CYAN, fg=t.colors.WHITE, bold=True, underline=True)
-        t.echo(msg+" " + name)
-    else:
-        t.secho(msg+" world", fg='blue')
+def startquiz_by_week(
+    name: str = t.Option("Hola", prompt="Write Your Name"),
+    week: str = t.Option("1", help="by default 1",prompt="week # : ")
+    
+):
+    t.echo(name+" "+week)
 
 
 @app.command()
@@ -75,7 +70,7 @@ def addqus(
         "\n-----------------------------------------------------------------\n" +
         success_msg +
         "\n| file saved in location ->  " +
-        t.style(f"{BASEDIR/qbank_json_file}", fg=t.colors.BRIGHT_CYAN)+
+        t.style(f"{BASEDIR/qbank_json_file}", fg=t.colors.BRIGHT_CYAN) +
         "\n-----------------------------------------------------------------\n"
     )
 
