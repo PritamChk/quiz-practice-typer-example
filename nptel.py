@@ -13,7 +13,7 @@ def main(name: Optional[str] = None):
     msg = "hello"
     if name:
         name = t.style(
-            f"{name}", fg=t.colors.BRIGHT_CYAN, bold=True, underline=True)
+            f"{name}", bg=t.colors.CYAN, fg=t.colors.WHITE, bold=True, underline=True)
         t.echo(msg+" " + name)
     else:
         t.secho(msg+" world", fg='blue')
@@ -61,10 +61,17 @@ def addqus(
             }
         )
     qbank_json["qustions"] = questions
-    json_object = json.dumps(qbank_json, indent = 4)
-    with open(qbank_file+".json","w") as f:
+    json_object = json.dumps(qbank_json, indent=4)
+    with open(qbank_file+".json", "w") as f:
         f.write(json_object)
-    
-    
+    success_msg = f"Your "+t.style(f"week{week}.txt", fg=t.colors.BRIGHT_RED)+" has been successfuly converted to "+t.style(
+        f"week{week}.json", bg=t.colors.BRIGHT_GREEN, fg=t.colors.BLACK, bold=True)
+    t.echo(
+        "\n----------------\n" +
+        success_msg +
+        "\n----------------\n"
+    )
+
+
 if __name__ == "__main__":
     app()
