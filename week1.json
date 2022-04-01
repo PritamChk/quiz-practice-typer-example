@@ -110,6 +110,28 @@
                     "is_correct": false
                 }
             ]
+        },
+        {
+            "qno": 6,
+            "statement": "Interviewing all members of a given population is called",
+            "options": [
+                {
+                    "value": "A sample.",
+                    "is_correct": false
+                },
+                {
+                    "value": "A gall up pole",
+                    "is_correct": false
+                },
+                {
+                    "value": "Censuses.",
+                    "is_correct": true
+                },
+                {
+                    "value": "Nielsen audit",
+                    "is_correct": false
+                }
+            ]
         }
     ]
 }

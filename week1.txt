@@ -28,3 +28,33 @@ Finding interesting co-relation and coordinates with the data.
 Finding the annotate strings and predicting time series.
 Finding low dimensional representations of data.
 Finding the annotate strings and predicting time series.
+Interviewing all members of a given population is called
+A sample.
+A gall up pole
+Censuses.
+Nielsen audit
+Censuses.
+Which one of the following is the benefit of using simple random sampling?
+Informants won’t refuse to participate.
+Interviewers can choose respondent freely.
+We can calculate the accuracy of the results.
+The results are always representative.
+We can calculate the accuracy of the results.
+What does a dummy variable regression analysis examine?
+Relationship between one continuous dependent and one continuous independent variable.
+Relationship between one categorical dependent and one continuous independent variable.
+Relationship between one continuous dependent and one categorical independent variable.
+Relationship between one continuous dependent and one classified variable.
+Relationship between one continuous dependent and one categorical independent variable.
+What assumptions are made when we use the t-distribution to perform a hypothesis test?
+The underline population has a constant variance.
+The underline population has a non-symmetrical distribution.
+The underline population follows a normal distribution.
+All of the above.
+The underline population has a constant variance.
+Which function used to print all variable names in a data frame df in R?
+names()
+names(df)
+df.names()
+names(“df”)
+names(df)
