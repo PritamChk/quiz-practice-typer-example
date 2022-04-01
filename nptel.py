@@ -28,7 +28,7 @@ def addqus(
         & per qus 4 options will be added
         --week: Week No
     """
-    qbank_file = "week"+str(week)+".txt"
+    qbank_file = "week"+str(week)
     no_options = 4
     noq = 3
     questions = []
@@ -37,7 +37,7 @@ def addqus(
     qbank_json = {
         "week": week
     }
-    with open(qbank_file, "r") as file:
+    with open(qbank_file+".txt", "r") as file:
         readlines = file.readlines()
 
     for index in range(noq):
@@ -47,7 +47,7 @@ def addqus(
         options = [
             {
                 "value": op.rstrip("\n"),
-                "is_correct": op == ans
+                "is_correct": op.rstrip("\n") == ans.rstrip("\n")
             } for op in options
         ]
         for _ in range(no_options+1):
@@ -62,7 +62,7 @@ def addqus(
         )
     qbank_json["qustions"] = questions
     json_object = json.dumps(qbank_json, indent = 4)
-    with open("week1.json","w") as f:
+    with open(qbank_file+".json","w") as f:
         f.write(json_object)
     
     

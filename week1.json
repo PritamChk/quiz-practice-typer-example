@@ -3,67 +3,67 @@
     "qustions": [
         {
             "qno": 1,
-            "statement": "who are you?",
+            "statement": "Classify each of the following as N, nominal, O, ordinal, I/R, interval/ratio data:(1)Pin code of any address (2)Amount of clothes you have (3)Place of your study (4)The last grade you achieved in class (5)Mileage of any car",
             "options": [
                 {
-                    "value": "Human",
+                    "value": "I/R, O, N, I/R, I/R.",
+                    "is_correct": false
+                },
+                {
+                    "value": "N, I/R, N, O, O.",
+                    "is_correct": false
+                },
+                {
+                    "value": "N, O, N, I/R/ I/R.",
                     "is_correct": true
                 },
                 {
-                    "value": "Yeti",
-                    "is_correct": false
-                },
-                {
-                    "value": "Cat",
-                    "is_correct": false
-                },
-                {
-                    "value": "Cockroch",
+                    "value": "I/R, N, O, I/R, N.",
                     "is_correct": false
                 }
             ]
         },
         {
             "qno": 2,
-            "statement": "who are Thou?",
+            "statement": "Two variables having r value of 0.01. What things do they suggest?",
             "options": [
                 {
-                    "value": "Human",
+                    "value": "They are positively co-related.",
+                    "is_correct": false
+                },
+                {
+                    "value": "They show causality.",
                     "is_correct": true
                 },
                 {
-                    "value": "Yeti",
+                    "value": "They are not co-related.",
                     "is_correct": false
                 },
                 {
-                    "value": "Cat",
-                    "is_correct": false
-                },
-                {
-                    "value": "Cockroch",
+                    "value": "There is a 7% co-relation.",
                     "is_correct": false
                 }
             ]
         },
         {
             "qno": 3,
-            "statement": "who are Vauuu?",
+            "statement": "What type of analytics uses statistical and machine learning techniques?",
             "options": [
                 {
-                    "value": "Human",
+                    "value": "Decision making.",
                     "is_correct": false
                 },
                 {
-                    "value": "Yeti",
+                    "value": "Prescriptive.",
                     "is_correct": false
                 },
                 {
-                    "value": "Cat",
+                    "value": "Descriptive.",
                     "is_correct": false
                 },
                 {
-                    "value": "Cockroch",
-                    "is_correct": false
+                    "value": "Predictive.",
+                    "is_correct": true
                 }
             ]
         }

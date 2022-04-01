@@ -1,18 +1,18 @@
-who are you?
-Human
-Yeti
-Cat
-Cockroch
-Human
-who are Thou?
-Human
-Yeti
-Cat
-Cockroch
-Human
-who are Vauuu?
-Human
-Yeti
-Cat
-Cockroch
-Human
+Classify each of the following as N, nominal, O, ordinal, I/R, interval/ratio data:(1)Pin code of any address (2)Amount of clothes you have (3)Place of your study (4)The last grade you achieved in class (5)Mileage of any car
+I/R, O, N, I/R, I/R.
+N, I/R, N, O, O.
+N, O, N, I/R/ I/R.
+I/R, N, O, I/R, N.
+N, O, N, I/R/ I/R.
+Two variables having r value of 0.01. What things do they suggest?
+They are positively co-related.
+They show causality.
+They are not co-related.
+There is a 7% co-relation.
+They show causality.
+What type of analytics uses statistical and machine learning techniques?
+Decision making.
+Prescriptive.
+Descriptive.
+Predictive.
+Predictive.
