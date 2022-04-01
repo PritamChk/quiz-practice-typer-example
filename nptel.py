@@ -1,6 +1,10 @@
-import typer as t
-from typing import Optional
 import json
+import pathlib
+from typing import Optional
+
+import typer as t
+
+BASEDIR = pathlib.Path().absolute()
 
 app = t.Typer()
 
@@ -64,12 +68,15 @@ def addqus(
     json_object = json.dumps(qbank_json, indent=4)
     with open(qbank_file+".json", "w") as f:
         f.write(json_object)
-    success_msg = f"Your "+t.style(f"week{week}.txt", fg=t.colors.BRIGHT_RED)+" has been successfuly converted to "+t.style(
-        f"week{week}.json", bg=t.colors.BRIGHT_GREEN, fg=t.colors.BLACK, bold=True)
+    success_msg = f"| Your "+t.style(f"week{week}.txt", fg=t.colors.BRIGHT_RED)+" has been successfuly converted to "+t.style(
+        f"week{week}.json", fg=t.colors.GREEN, bold=True)
+    qbank_json_file = qbank_file+".json"
     t.echo(
-        "\n----------------\n" +
+        "\n-----------------------------------------------------------------\n" +
         success_msg +
-        "\n----------------\n"
+        "\n| file saved in location ->  " +
+        t.style(f"{BASEDIR/qbank_json_file}", fg=t.colors.BRIGHT_CYAN)+
+        "\n-----------------------------------------------------------------\n"
     )
 
 
