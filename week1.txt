@@ -56,5 +56,5 @@ Which function used to print all variable names in a data frame df in R?
 names()
 names(df)
 df.names()
-names(“df”)
+names("df")
 names(df)
