@@ -16,3 +16,15 @@ Prescriptive.
 Descriptive.
 Predictive.
 Predictive.
+What are the ways to avoid overfitting issues?
+By adding a penalty for every data decreasing the complexity.
+By testing the model with one-third of the training data itself.
+By using the resampling techniques to estimate model accuracy.
+All of the above.
+All of the above.
+Which of the following is not true about unsupervised learning?
+It finds clusters of the data.
+Finding interesting co-relation and coordinates with the data.
+Finding the annotate strings and predicting time series.
+Finding low dimensional representations of data.
+Finding the annotate strings and predicting time series.

@@ -66,6 +66,50 @@
                     "is_correct": true
                 }
             ]
+        },
+        {
+            "qno": 4,
+            "statement": "What are the ways to avoid overfitting issues?",
+            "options": [
+                {
+                    "value": "By adding a penalty for every data decreasing the complexity.",
+                    "is_correct": false
+                },
+                {
+                    "value": "By testing the model with one-third of the training data itself.",
+                    "is_correct": false
+                },
+                {
+                    "value": "By using the resampling techniques to estimate model accuracy.",
+                    "is_correct": false
+                },
+                {
+                    "value": "All of the above.",
+                    "is_correct": true
+                }
+            ]
+        },
+        {
+            "qno": 5,
+            "statement": "Which of the following is not true about unsupervised learning?",
+            "options": [
+                {
+                    "value": "It finds clusters of the data.",
+                    "is_correct": false
+                },
+                {
+                    "value": "Finding interesting co-relation and coordinates with the data.",
+                    "is_correct": false
+                },
+                {
+                    "value": "Finding the annotate strings and predicting time series.",
+                    "is_correct": true
+                },
+                {
+                    "value": "Finding low dimensional representations of data.",
+                    "is_correct": false
+                }
+            ]
         }
     ]
 }

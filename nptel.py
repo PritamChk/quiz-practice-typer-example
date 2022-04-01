@@ -30,7 +30,7 @@ def addqus(
     """
     qbank_file = "week"+str(week)
     no_options = 4
-    noq = 3
+    noq = 5
     questions = []
     options = []
     readlines = []
