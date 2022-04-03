@@ -57,7 +57,7 @@ def startquiz(
                 not_attempted_qus-=1
                 qus_options = qus.get("options")
                 rnd.shuffle(qus_options)
-                t.echo(f"{qus.get('qno')} ) {qus.get('statement')}")
+                t.echo(f"\n{qus.get('qno')} ) {qus.get('statement')}")
 
                 for i in range(1, 5):
                     t.echo(f"{i}) {qus_options[i-1].get('value')}")
