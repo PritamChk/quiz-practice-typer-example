@@ -1,14 +1,17 @@
 import json
 import random as rnd
 import pathlib
+import time
 import typer as t
 import os
+
 
 def clearConsole():
     command = 'clear'
     if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
         command = 'cls'
     os.system(command)
+
 
 BASEDIR = pathlib.Path().absolute()
 
@@ -25,51 +28,88 @@ def startquiz(
         no_qus: int = t.Option(10, "-q", min=3, max=120,
                                help="This is applicable for Random Quiz")
 ):
-
+    clearConsole()
     name = t.style(name, bold=True, fg=t.colors.RED)
     t.echo("\nWelcome "+name +
            "\n----------------------\nYour Quiz Has been started: \n")
     if weekly:
         week_no = 1  # TODO:  delete this line later on
         quiz_db_file = f"week{week_no}.json"
-        no_qus: int = 10
+        # no_qus: int = 10
         quiz: dict = {}
         with open(quiz_db_file, "r") as jsonfile:
             quiz = json.load(jsonfile)
         qweek: int = quiz["week"]
         t.secho(
-            f"Week : {week_no}\n-----------------------\n"
+            f"Week : {qweek}\n-----------------------\n", fg=t.colors.YELLOW
         )
 
-        quiz_questions: list[dict] = rnd.shuffle(quiz['questions'])
-
+        quiz_questions = quiz['qustions']
+        rnd.shuffle(quiz_questions)
+        # print(quiz_questions)
         total_marks = 0
+        attempted_qus = 0
+        not_attempted_qus = 10
 
-        for qus in quiz_questions:
-            qus_options = rnd.shuffle(qus.get("options"))
+        with t.progressbar(quiz_questions,label="progress",fill_char=t.style(" ",bg=t.colors.BRIGHT_MAGENTA)) as qq:
+            for qus in qq:
+                attempted_qus+=1
+                not_attempted_qus-=1
+                qus_options = qus.get("options")
+                rnd.shuffle(qus_options)
+                t.echo(f"{qus.get('qno')} ) {qus.get('statement')}")
 
-            t.echo(qus.get("qno")+") "+qus.get("statement"))
+                for i in range(1, 5):
+                    t.echo(f"{i}) {qus_options[i-1].get('value')}")
 
-            for i in range(1, 5):
-                t.echo(f"{i}) f{qus_options[i-1]}")
+                ans = t.prompt("Select Option no ")
 
-            ans = t.prompt("Select Option no: ")
-            
-            ans_success = lambda ans: t.colors.BRIGHT_GREEN if qus_options[ans].get("is_correct") == True else t.colors.RED
+                ans_success = t.colors.RED
 
-            if ans not in range(1, 5):
-                t.secho("Please give proper option value; within [1-4]")
-                t.Abort()
-            if qus_options[ans].get("is_correct") == True:
-                total_marks += 1
+                if not (ans>="1" and ans<="4"):
+                    t.secho("Please give proper option value; within [1-4]")
+                    raise t.Abort()
+                else:
+                    ans = int(ans)
+                if qus_options[ans-1].get("is_correct") == True:
+                    ans_success = t.colors.GREEN
+                    total_marks += 1
 
-            clearConsole()
-            #print qus ans by clearing the previous screen
-            t.echo(qus.get("qno")+") "+qus.get("statement"))
-            for i in range(1, 5):
-                if i==ans:
-                    t.secho(f"{i}) f{qus_options[i-1]}",fg = ans_success(ans)) #TODO: .value add
-                if 
+                clearConsole()
+                # print qus ans by clearing the previous screen
+                t.echo(f"{qus.get('qno')} ) {qus.get('statement')}")
+                for i in range(1, 5):
+                    time.sleep(.1)
+                    if i == ans:
+                        # TODO: .value add
+                        t.secho(f"{i}) {qus_options[i-1].get('value')}", fg=ans_success)
+                    elif qus_options[i-1].get("is_correct") == True:
+                        # TODO: .value add
+                        t.secho(
+                            f"{i}) {qus_options[i-1].get('value')}", fg=t.colors.GREEN)
+                    else:
+                        t.echo(f"{i}) {qus_options[i-1].get('value')}")
+                cnf = t.confirm("Next Qus ",True)
+                if not cnf:
+                    clearConsole()  
+                    print("--------------------------")
+                    t.echo(
+                        "| Your Result : "+
+                        t.style(f"{total_marks}/10",fg=t.colors.BRIGHT_BLUE,bold=True)+
+                        "\n| Attempted Qus :"+
+                        t.style(f" {attempted_qus} / out of 10",fg=t.colors.BRIGHT_RED)    
+                    )
+                    print("--------------------------")
+                    raise t.Abort()
+                clearConsole()
+        print("--------------------------")
+        t.echo(
+            "| Your Result : "+
+            t.style(f"{total_marks}/10",fg=t.colors.BRIGHT_BLUE,bold=True)+
+            "\n| Attempted Qus :"+
+            t.style(f" {attempted_qus} / out of 10",fg=t.colors.BRIGHT_RED)    
+        )
+        print("--------------------------")
 
 @app.command()
 def addqus(
