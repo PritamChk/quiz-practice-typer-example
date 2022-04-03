@@ -172,8 +172,8 @@ def addqus(
             ans = readlines[4]
             options = [
                 {
-                    "value": op.rstrip("\n"),
-                    "is_correct": op.rstrip("\n") == ans.rstrip("\n")
+                    "value": op.rstrip("\n").strip(),
+                    "is_correct": op.rstrip("\n").strip() == ans.rstrip("\n").strip()
                 } for op in options
             ]
             for _ in range(no_options+1):
