@@ -59,11 +59,10 @@ def startquiz(
     t.echo("\nWelcome "+name +
            "\n----------------------\nYour Quiz Has been started: \n")
     if weekly:
-        # week_no = 1  # TODO:  delete this line later on
         quiz_db_file = f"week{week_no}.json"
         # no_qus: int = 10
         quiz: dict = {}
-        with open(quiz_db_file, "r") as jsonfile:
+        with open(BASEDIR/"db"/quiz_db_file, "r") as jsonfile:
             quiz = json.load(jsonfile)
         qweek: int = quiz["week"]
         t.secho(
@@ -107,11 +106,9 @@ def startquiz(
                 for i in range(1, 5):
                     time.sleep(.1)
                     if i == ans:
-                        # TODO: .value add
                         t.secho(
                             f"{i}) {qus_options[i-1].get('value')}", fg=ans_success)
                     elif qus_options[i-1].get("is_correct") == True:
-                        # TODO: .value add
                         t.secho(
                             f"{i}) {qus_options[i-1].get('value')}", fg=t.colors.GREEN)
                     else:
