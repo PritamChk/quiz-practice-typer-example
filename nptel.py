@@ -19,6 +19,32 @@ app = t.Typer()
 
 
 @app.command()
+def join_weeks(
+    # from_:int=t.Option(1,'-f',help="from which week: #"),
+    # to_:int = t.Option(9,'-t',help="to which week: #")
+):
+    folder = "db"
+    weeks_json = os.listdir(BASEDIR/folder)
+    quiz = {"data": []}
+    with t.progressbar(weeks_json, label="Merging : ", fill_char=t.style(" ", bg=t.colors.YELLOW)) as weeksjson:
+        for each_week in weeksjson:
+            time.sleep(.2)
+            with open(BASEDIR/folder/each_week, "r") as file:
+                wq = json.load(file)
+                quiz["data"].append(wq)
+    quiz_data = json.dumps(quiz, indent=4)
+    saved_file = "quiz_data.json"
+    with open(saved_file, "w") as file:
+        file.write(quiz_data)
+    t.echo(
+        "---------------------------------------------------" +
+        "\n|Your Combined quiz data saved at location ->\n|" +
+        t.style(f"{BASEDIR/saved_file}", fg=t.colors.BLUE) +
+        "\n---------------------------------------------------\n"
+    )
+
+
+@app.command()
 def startquiz(
         name: str = t.Option("Hola", prompt="Write Your Name"),
         week_no: int = t.Option(rnd.randint(1, 12), "-n", min=1, max=12,
@@ -51,10 +77,10 @@ def startquiz(
         attempted_qus = 0
         not_attempted_qus = 10
 
-        with t.progressbar(quiz_questions,label="progress",fill_char=t.style(" ",bg=t.colors.BRIGHT_MAGENTA)) as qq:
+        with t.progressbar(quiz_questions, label="progress", fill_char=t.style(" ", bg=t.colors.BRIGHT_MAGENTA)) as qq:
             for qus in qq:
-                attempted_qus+=1
-                not_attempted_qus-=1
+                attempted_qus += 1
+                not_attempted_qus -= 1
                 qus_options = qus.get("options")
                 rnd.shuffle(qus_options)
                 t.echo(f"\n{qus.get('qno')} ) {qus.get('statement')}")
@@ -66,7 +92,7 @@ def startquiz(
 
                 ans_success = t.colors.RED
 
-                if not (ans>="1" and ans<="4"):
+                if not (ans >= "1" and ans <= "4"):
                     t.secho("Please give proper option value; within [1-4]")
                     raise t.Abort()
                 else:
@@ -82,34 +108,37 @@ def startquiz(
                     time.sleep(.1)
                     if i == ans:
                         # TODO: .value add
-                        t.secho(f"{i}) {qus_options[i-1].get('value')}", fg=ans_success)
+                        t.secho(
+                            f"{i}) {qus_options[i-1].get('value')}", fg=ans_success)
                     elif qus_options[i-1].get("is_correct") == True:
                         # TODO: .value add
                         t.secho(
                             f"{i}) {qus_options[i-1].get('value')}", fg=t.colors.GREEN)
                     else:
                         t.echo(f"{i}) {qus_options[i-1].get('value')}")
-                cnf = t.confirm("Next Qus ",True)
+                cnf = t.confirm("Next Qus ", True)
                 if not cnf:
-                    clearConsole()  
+                    clearConsole()
                     print("--------------------------")
                     t.echo(
-                        "| Your Result : "+
-                        t.style(f"{total_marks}/10",fg=t.colors.BRIGHT_BLUE,bold=True)+
-                        "\n| Attempted Qus :"+
-                        t.style(f" {attempted_qus} / out of 10",fg=t.colors.BRIGHT_RED)    
+                        "| Your Result : " +
+                        t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
+                        "\n| Attempted Qus :" +
+                        t.style(f" {attempted_qus} / out of 10",
+                                fg=t.colors.BRIGHT_RED)
                     )
                     print("--------------------------")
                     raise t.Abort()
                 clearConsole()
         print("--------------------------")
         t.echo(
-            "| Your Result : "+
-            t.style(f"{total_marks}/10",fg=t.colors.BRIGHT_BLUE,bold=True)+
-            "\n| Attempted Qus :"+
-            t.style(f" {attempted_qus} / out of 10",fg=t.colors.BRIGHT_RED)    
+            "| Your Result : " +
+            t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
+            "\n| Attempted Qus :" +
+            t.style(f" {attempted_qus} / out of 10", fg=t.colors.BRIGHT_RED)
         )
         print("--------------------------")
+
 
 @app.command()
 def addqus(
