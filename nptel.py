@@ -33,7 +33,7 @@ def startquiz(
     t.echo("\nWelcome "+name +
            "\n----------------------\nYour Quiz Has been started: \n")
     if weekly:
-        week_no = 1  # TODO:  delete this line later on
+        # week_no = 1  # TODO:  delete this line later on
         quiz_db_file = f"week{week_no}.json"
         # no_qus: int = 10
         quiz: dict = {}
