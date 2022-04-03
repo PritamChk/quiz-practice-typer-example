@@ -184,7 +184,7 @@ def addqus(
     qbank_json = {
         "week": week
     }
-    with open(qbank_file+".txt", "r") as file:
+    with open(BASEDIR/"raw_text"/(qbank_file+".txt"), "r") as file:
         readlines = file.readlines()
 
     import time
@@ -215,7 +215,8 @@ def addqus(
             )
     qbank_json["qustions"] = questions
     json_object = json.dumps(qbank_json, indent=4)
-    with open(qbank_file+".json", "w") as f:
+    save_location = BASEDIR/"db"/(qbank_file+".json")
+    with open(save_location, "w") as f:
         f.write(json_object)
     success_msg = f"| Your "+t.style(f"week{week}.txt", fg=t.colors.BRIGHT_RED)+" has been successfuly converted to "+t.style(
         f"week{week}.json", fg=t.colors.GREEN, bold=True)
