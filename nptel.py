@@ -18,16 +18,46 @@ def startquiz_by_week(
 
 @app.command()
 def addqus(
-    week: int = t.Option(..., min=1, max=12)
+    week: int = t.Option(...,"-w" ,min=1, max=12,help="Provide the week no and week#.txt should exist in same directory"),
+    noq:int = t.Option(10,"-n",min=1,max=10,help="Enter No of Qus to be converted",)
 ):
     """
-        Per week 10 qustions will be taken input via cmd
+        Per week 10 qustions will be taken input via file: week#.txt
+        
         & per qus 4 options will be added
+        
+        After that the ans options have to be added
+        
+        ## NB: Case sensitive comparisions
+        
+        example:
+        
+        ---------
+        
+        who are you?
+        
+        Human
+        
+        Yeti
+        
+        Dog
+        
+        Cat
+        
+        Human
+    
+        
         --week: Week No
+        
+        -w : week no for short notation
+        
+        --noq: no of qus
+        
+        -n : no of qus short notation
     """
     qbank_file = "week"+str(week)
     no_options = 4
-    noq = 10
+    # noq = 10
     questions = []
     options = []
     readlines = []
