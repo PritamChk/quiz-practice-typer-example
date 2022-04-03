@@ -47,7 +47,8 @@ def join_weeks(
 @app.command()
 def startquiz(
         name: str = t.Option("Hola", prompt="Write Your Name"),
-        week_no: int = t.Option(rnd.randint(1, 12), "-n", min=1, max=12,
+        week_no: int = t.Option(rnd.randint(1, 9) #TODO change 9 to 12  
+                                , "-n", min=1, max=12,
                                 help="by default 1 and range  [ 1<=x<=12 ]"),
         weekly: bool = t.Option(
             True, "-w", help="If True then qus given weekly else taken randomly from any week"),
