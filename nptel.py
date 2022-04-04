@@ -47,14 +47,22 @@ def join_weeks(
 @app.command()
 def startquiz(
         name: str = t.Option("Hola", prompt="Write Your Name"),
-        week_no: int = t.Option(rnd.randint(1, 9) #TODO change 9 to 12  
-                                , "-n", min=1, max=12,
+        week_no: int = t.Option(rnd.randint(1, 9)  # TODO change 9 to 12
+                                , "--week-no", min=1, max=12,
                                 help="by default 1 and range  [ 1<=x<=12 ]"),
         weekly: bool = t.Option(
             True, "-w", help="If True then qus given weekly else taken randomly from any week"),
         no_qus: int = t.Option(10, "-q", min=3, max=120,
                                help="This is applicable for Random Quiz")
 ):
+    """
+        --week-no : the week no you want to practice
+
+        -w : if you want to practice qustions by week or randomly from any where
+            if -w true then weekly else randomly and then you have to provide how many questions you want to practice
+
+        -q : no of qus you want to practice
+    """
     clearConsole()
     name = t.style(name, bold=True, fg=t.colors.RED)
     t.echo("\nWelcome "+name +
@@ -114,7 +122,7 @@ def startquiz(
                             f"{i}) {qus_options[i-1].get('value')}", fg=t.colors.GREEN)
                     else:
                         t.echo(f"{i}) {qus_options[i-1].get('value')}")
-                cnf = t.confirm("Next Qus ", True)
+                cnf = t.confirm("Next Qus [press enter to continue] ", True)
                 if not cnf:
                     clearConsole()
                     print("--------------------------")
@@ -123,7 +131,12 @@ def startquiz(
                         t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
                         "\n| Attempted Qus :" +
                         t.style(f" {attempted_qus} / out of 10",
-                                fg=t.colors.BRIGHT_RED)
+                                fg=t.colors.BRIGHT_RED) +
+                        "\n| Percentage :" +
+                        t.style(f" {total_marks/10:.1%}", fg=t.colors.CYAN)+
+                        "\n| Accuracy :" +
+                        t.style(f" {total_marks/attempted_qus:.2%}",
+                                fg=t.colors.BRIGHT_YELLOW)
                     )
                     print("--------------------------")
                     raise t.Abort()
@@ -133,7 +146,12 @@ def startquiz(
             "| Your Result : " +
             t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
             "\n| Attempted Qus :" +
-            t.style(f" {attempted_qus} / out of 10", fg=t.colors.BRIGHT_RED)
+            t.style(f" {attempted_qus} / out of 10", fg=t.colors.BRIGHT_RED) +
+            "\n| Percentage :" +
+            t.style(f" {total_marks/10:.1%}", fg=t.colors.CYAN)+
+            "\n| Accuracy :" +
+            t.style(f" {total_marks/attempted_qus:.2%}", fg=t.colors.BRIGHT_YELLOW)
+
         )
         print("--------------------------")
 
