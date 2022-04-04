@@ -50,6 +50,13 @@ def show_qus_and_get_ans(combo: list[int], data: list[dict]) -> int:
     for option, index in zip(options_list, range(1, 5)):
         t.echo(f"{index}) {option.get('value')}")
     ans = t.prompt("Choose option [1-4] ", type=int)
+    if not (ans >= 1 and ans <= 4):
+        t.secho("Bokachoda thik kore input de", fg="red")
+        ans = t.prompt("Select Option no ", type=int)
+        if not (ans >= 1 and ans <= 4):
+            t.secho("Bokachoda Gandu,  thik kore input dite jane na", fg="red")
+            raise t.Abort()
+
     ans -= 1
     clearConsole()
     marks = 0

@@ -45,8 +45,8 @@ def startquiz(
                                 help="by default 1 and range  [ 1<=x<=12 ]"),
         weekly: bool = t.Option(
             True, "--weekly/--random", "-w/-r", help="If True then qus given weekly else taken randomly from any week"),
-        no_qus: int = t.Option(10, '--no-qus', "-q", min=3, 
-                               max=90, # TODO: change 90 -> 120
+        no_qus: int = t.Option(10, '--no-qus', "-q", min=3,
+                               max=90,  # TODO: change 90 -> 120
                                help="This is applicable for Random Quiz")
 ):
     """
@@ -87,15 +87,17 @@ def startquiz(
                 for i in range(1, 5):
                     t.echo(f"{i}) {qus_options[i-1].get('value')}")
 
-                ans = t.prompt("Select Option no ")
+                ans = t.prompt("Select Option no [1-4]", type=int)
+                if not (ans >= 1 and ans <= 4):
+                    t.secho("Bokachoda thik kore input de", fg="red")
+                    ans = t.prompt("Select Option no [1-4]", type=int)
+                    if not (ans >= 1 and ans <= 4):
+                        t.secho(
+                            "Bokachoda Gandu,  thik kore input dite jane na\n Vag Bara", fg="red")
+                        raise t.Abort()
 
                 ans_success = t.colors.RED
 
-                if not (ans >= "1" and ans <= "4"):
-                    t.secho("Please give proper option value; within [1-4]")
-                    raise t.Abort()
-                else:
-                    ans = int(ans)
                 if qus_options[ans-1].get("is_correct") == True:
                     ans_success = t.colors.GREEN
                     total_marks += 1
