@@ -41,11 +41,11 @@ def join_weeks(
 def startquiz(
         name: str = t.Option("Hola", prompt="Write Your Name"),
         week_no: int = t.Option(rnd.randint(1, 9)  # TODO change 9 to 12
-                                , "--week-no","-n", min=1, max=12,
+                                , "--week-no", "-n", min=1, max=12,
                                 help="by default 1 and range  [ 1<=x<=12 ]"),
         weekly: bool = t.Option(
-            True, "--weekly/--random","-w/-r", help="If True then qus given weekly else taken randomly from any week"),
-        no_qus: int = t.Option(10, '--no-qus',"-q", min=3, max=120,
+            True, "--weekly/--random", "-w/-r", help="If True then qus given weekly else taken randomly from any week"),
+        no_qus: int = t.Option(10, '--no-qus', "-q", min=3, max=120,
                                help="This is applicable for Random Quiz")
 ):
     """
@@ -134,7 +134,6 @@ def startquiz(
             if combo not in random_qus_set:
                 random_qus_set.append(combo)
                 count += 1
-
         # RESULT VARIABLES
         attempted_qus = 0
         total_marks = 0
@@ -143,16 +142,15 @@ def startquiz(
         with t.progressbar(random_qus_set, label="Progress ", fill_char=t.style(" ", bg=t.colors.MAGENTA)) as qus_set:
             for qus_combo in qus_set:
                 total_marks += show_qus_and_get_ans(qus_combo, quiz_list)
-                attempted_qus+=1
-                cnf = t.confirm("Next qus [Press Enter]",True)
+                attempted_qus += 1
+                cnf = t.confirm("Next qus [Press Enter]", True)
                 if not cnf:
                     clearConsole()
-                    show_result(attempted_qus,total_marks,no_qus)
+                    show_result(attempted_qus, total_marks, no_qus)
                     raise t.Abort()
                 clearConsole()
         clearConsole()
-        show_result(attempted_qus,total_marks,no_qus)
-                
+        show_result(attempted_qus, total_marks, no_qus)
 
 
 @app.command()

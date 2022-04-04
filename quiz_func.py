@@ -1,10 +1,10 @@
-import time 
+import time
 import random as rnd
 import os
 import typer as t
 
 
-def show_result(attempted_qus:int, total_marks:int, no_qus:int)->None:
+def show_result(attempted_qus: int, total_marks: int, no_qus: int) -> None:
     print("--------------------------------------------------------------")
     t.echo(
         "| Your Result : " +
@@ -21,15 +21,15 @@ def show_result(attempted_qus:int, total_marks:int, no_qus:int)->None:
     print("---------------------------------------------------------------")
 
 
-def generate_combo()->list[int,int] :
+def generate_combo() -> list[int, int]:
     """
         this generates combination like [1,3],[2,3]
     """
-    rnd.seed(time.time())   
-    week = rnd.randint(1,9) #TODO: Change 9 -> 12
-    qus_num = rnd.randint(1,10)
-    combo = [week,qus_num]  
-    return combo   
+    rnd.seed(time.time())
+    week = rnd.randint(1, 9)  # TODO: Change 9 -> 12
+    qus_num = rnd.randint(1, 10)
+    combo = [week, qus_num]
+    return combo
 
 
 def clearConsole():
@@ -37,7 +37,8 @@ def clearConsole():
     if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
         command = 'cls'
     os.system(command)
-    
+
+
 def show_qus_and_get_ans(combo: list[int], data: list[dict]) -> int:
     # clearConsole()
     t.echo()
@@ -56,11 +57,13 @@ def show_qus_and_get_ans(combo: list[int], data: list[dict]) -> int:
     for option, index in zip(options_list, range(1, 5)):
         time.sleep(.15)
         if index-1 == ans:
-            color = t.colors.GREEN if options_list[ans].get("is_correct") else t.colors.RED
+            color = t.colors.GREEN if options_list[ans].get(
+                "is_correct") else t.colors.RED
             marks = 1 if options_list[ans].get("is_correct") else 0
-            t.secho(f"{index}) {option.get('value')}",fg=color)
+            t.secho(f"{index}) {option.get('value')}", fg=color)
         else:
-            color = t.colors.GREEN if option.get('is_correct') else t.colors.BRIGHT_WHITE
-            t.secho(f"{index}) {option.get('value')}",fg=color)
-            
+            color = t.colors.GREEN if option.get(
+                'is_correct') else t.colors.BRIGHT_WHITE
+            t.secho(f"{index}) {option.get('value')}", fg=color)
+
     return marks
