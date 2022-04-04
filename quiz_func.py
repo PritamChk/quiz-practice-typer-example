@@ -54,7 +54,7 @@ def show_qus_and_get_ans(combo: list[int], data: list[dict]) -> int:
         t.secho("Bokachoda thik kore input de", fg="red")
         ans = t.prompt("Select Option no ", type=int)
         if not (ans >= 1 and ans <= 4):
-            t.secho("Bokachoda Gandu,  thik kore input dite jane na", fg="red")
+            t.secho("Bokachoda Gandu,  thik kore input dite jane na \n Vag Laora", fg="red")
             raise t.Abort()
 
     ans -= 1

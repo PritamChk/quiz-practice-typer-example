@@ -94,6 +94,7 @@ def startquiz(
                     if not (ans >= 1 and ans <= 4):
                         t.secho(
                             "Bokachoda Gandu,  thik kore input dite jane na\n Vag Bara", fg="red")
+                        show_result(attempted_qus, total_marks, 10)
                         raise t.Abort()
 
                 ans_success = t.colors.RED
