@@ -21,7 +21,7 @@ def show_result(attempted_qus:int, total_marks:int, no_qus:int)->None:
     print("---------------------------------------------------------------")
 
 
-def generate_combo()->list[list[int,int]] :
+def generate_combo()->list[int,int] :
     """
         this generates combination like [1,3],[2,3]
     """
