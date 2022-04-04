@@ -45,7 +45,8 @@ def startquiz(
                                 help="by default 1 and range  [ 1<=x<=12 ]"),
         weekly: bool = t.Option(
             True, "--weekly/--random", "-w/-r", help="If True then qus given weekly else taken randomly from any week"),
-        no_qus: int = t.Option(10, '--no-qus', "-q", min=3, max=120,
+        no_qus: int = t.Option(10, '--no-qus', "-q", min=3, 
+                               max=90, # TODO: change 90 -> 120
                                help="This is applicable for Random Quiz")
 ):
     """
