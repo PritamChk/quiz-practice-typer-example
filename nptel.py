@@ -4,14 +4,7 @@ import pathlib
 import time
 import typer as t
 import os
-
-
-def clearConsole():
-    command = 'clear'
-    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
-        command = 'cls'
-    os.system(command)
-
+from .quiz_func import *
 
 BASEDIR = pathlib.Path().absolute()
 
@@ -42,23 +35,6 @@ def join_weeks(
         t.style(f"{BASEDIR/saved_file}", fg=t.colors.BLUE) +
         "\n---------------------------------------------------\n"
     )
-
-
-def show_result(attempted_qus:int, total_marks:int, no_qus:int)->None:
-    print("--------------------------------------------------------------")
-    t.echo(
-        "| Your Result : " +
-        t.style(f"{total_marks}/{no_qus}", fg=t.colors.BRIGHT_BLUE, bold=True) +
-        "\n| Attempted Qus :" +
-        t.style(f" {attempted_qus} / out of {no_qus}", fg=t.colors.BRIGHT_RED) +
-        "\n| Percentage :" +
-        t.style(f" {total_marks/no_qus:.1%}", fg=t.colors.CYAN) +
-        "\n| Accuracy :" +
-        t.style(f" {total_marks/attempted_qus:.2%}",
-                fg=t.colors.BRIGHT_YELLOW)
-
-    )
-    print("---------------------------------------------------------------")
 
 
 @app.command()
@@ -142,10 +118,16 @@ def startquiz(
                 cnf = t.confirm("Next Qus [press enter to continue] ", True)
                 if not cnf:
                     clearConsole()
-                    show_result(attempted_qus,total_marks,10)    
+                    show_result(attempted_qus, total_marks, 10)
                     raise t.Abort()
                 clearConsole()
-        show_result(attempted_qus,total_marks,10)    
+        show_result(attempted_qus, total_marks, 10)
+    else:
+        random_qus_set = []
+        combo = generate_combo()
+        random_qus_set.append(combo)
+        for q in range(no_qus-1):
+            pass
 
 
 @app.command()
