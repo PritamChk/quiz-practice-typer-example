@@ -44,6 +44,23 @@ def join_weeks(
     )
 
 
+def show_result(attempted_qus:int, total_marks:int, no_qus:int)->None:
+    print("--------------------------------------------------------------")
+    t.echo(
+        "| Your Result : " +
+        t.style(f"{total_marks}/{no_qus}", fg=t.colors.BRIGHT_BLUE, bold=True) +
+        "\n| Attempted Qus :" +
+        t.style(f" {attempted_qus} / out of {no_qus}", fg=t.colors.BRIGHT_RED) +
+        "\n| Percentage :" +
+        t.style(f" {total_marks/no_qus:.1%}", fg=t.colors.CYAN) +
+        "\n| Accuracy :" +
+        t.style(f" {total_marks/attempted_qus:.2%}",
+                fg=t.colors.BRIGHT_YELLOW)
+
+    )
+    print("---------------------------------------------------------------")
+
+
 @app.command()
 def startquiz(
         name: str = t.Option("Hola", prompt="Write Your Name"),
@@ -125,35 +142,10 @@ def startquiz(
                 cnf = t.confirm("Next Qus [press enter to continue] ", True)
                 if not cnf:
                     clearConsole()
-                    print("--------------------------")
-                    t.echo(
-                        "| Your Result : " +
-                        t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
-                        "\n| Attempted Qus :" +
-                        t.style(f" {attempted_qus} / out of 10",
-                                fg=t.colors.BRIGHT_RED) +
-                        "\n| Percentage :" +
-                        t.style(f" {total_marks/10:.1%}", fg=t.colors.CYAN)+
-                        "\n| Accuracy :" +
-                        t.style(f" {total_marks/attempted_qus:.2%}",
-                                fg=t.colors.BRIGHT_YELLOW)
-                    )
-                    print("--------------------------")
+                    show_result(attempted_qus,total_marks,10)    
                     raise t.Abort()
                 clearConsole()
-        print("--------------------------")
-        t.echo(
-            "| Your Result : " +
-            t.style(f"{total_marks}/10", fg=t.colors.BRIGHT_BLUE, bold=True) +
-            "\n| Attempted Qus :" +
-            t.style(f" {attempted_qus} / out of 10", fg=t.colors.BRIGHT_RED) +
-            "\n| Percentage :" +
-            t.style(f" {total_marks/10:.1%}", fg=t.colors.CYAN)+
-            "\n| Accuracy :" +
-            t.style(f" {total_marks/attempted_qus:.2%}", fg=t.colors.BRIGHT_YELLOW)
-
-        )
-        print("--------------------------")
+        show_result(attempted_qus,total_marks,10)    
 
 
 @app.command()
