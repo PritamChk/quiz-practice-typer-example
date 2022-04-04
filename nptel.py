@@ -73,15 +73,12 @@ def startquiz(
 
         quiz_questions = quiz['qustions']
         rnd.shuffle(quiz_questions)
-        # print(quiz_questions)
         total_marks = 0
         attempted_qus = 0
-        not_attempted_qus = 10
 
         with t.progressbar(quiz_questions, label="progress", fill_char=t.style(" ", bg=t.colors.BRIGHT_MAGENTA)) as qq:
             for qus in qq:
                 attempted_qus += 1
-                not_attempted_qus -= 1
                 qus_options = qus.get("options")
                 rnd.shuffle(qus_options)
                 t.echo(f"\n{qus.get('qno')} ) {qus.get('statement')}")
@@ -126,8 +123,13 @@ def startquiz(
         random_qus_set = []
         combo = generate_combo()
         random_qus_set.append(combo)
-        for q in range(no_qus-1):
-            pass
+        count = 1
+        while count<=no_qus:
+            combo = generate_combo()
+            if combo not in random_qus_set:
+                random_qus_set.append(combo)
+                count+=1
+        #TODO: show qus and take ans
 
 
 @app.command()
