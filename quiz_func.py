@@ -37,3 +37,30 @@ def clearConsole():
     if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
         command = 'cls'
     os.system(command)
+    
+def show_qus_and_get_ans(combo: list[int], data: list[dict]) -> int:
+    # clearConsole()
+    t.echo()
+    week, qus_no = combo
+    qus: dict = data[week-1].get("qustions")[qus_no-1]
+    options_list: list[dict] = qus.get("options")
+    rnd.shuffle(options_list)
+    t.echo(f"{qus.get('qno')} ) {qus.get('statement')}\n")
+    for option, index in zip(options_list, range(1, 5)):
+        t.echo(f"{index}) {option.get('value')}")
+    ans = t.prompt("Choose option [1-4] ", type=int)
+    ans -= 1
+    clearConsole()
+    marks = 0
+    t.echo(f"{qus.get('qno')} ) {qus.get('statement')}\n")
+    for option, index in zip(options_list, range(1, 5)):
+        time.sleep(.15)
+        if index-1 == ans:
+            color = t.colors.GREEN if options_list[ans].get("is_correct") else t.colors.RED
+            marks = 1 if options_list[ans].get("is_correct") else 0
+            t.secho(f"{index}) {option.get('value')}",fg=color)
+        else:
+            color = t.colors.GREEN if option.get('is_correct') else t.colors.BRIGHT_WHITE
+            t.secho(f"{index}) {option.get('value')}",fg=color)
+            
+    return marks
